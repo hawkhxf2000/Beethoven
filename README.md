@@ -8,10 +8,13 @@ table inventory:
     list_price >= warehousing_cost*1.5 
 
 table sale:
-     discount <= list_price*0.2
+    discount <= list_price*0.2
     sale_price = list_price - discount
 
 table bill:
+    price = table sale(list_price)
+    discount = table sale(discount)
+    sub_total = table(sale_price)
     tax = sub_total *0.15
     total = sub_total + tax
 
